@@ -5,7 +5,7 @@ A .NET-based microservices project with separate User and Authentication service
 
 ## Overview
 
-**awesome-azure-microservices** is a scalable microservices-based platform built using .NET technologies, focused on centralized user management and authentication services.
+**user-auth-microservices** is a scalable microservices-based platform built using .NET technologies, focused on centralized user management and authentication services.
 
 This project follows clean architecture principles and standard coding practices such as SOLID, separation of concerns, and TDD. It features:
 
