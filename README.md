@@ -23,7 +23,7 @@ It is built to be **extensible**, allowing you to plug this into systems like:
 ---
 
 ## Project Structure
----bash
+````bash
 awesome-azure-microservices/
 │
 ├── user-service/                  # Centralized User Info (general only)
