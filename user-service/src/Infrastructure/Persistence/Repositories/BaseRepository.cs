@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Application.Intefaces.Common;
+using UserService.Application.Intefaces.Common;
 using Microsoft.EntityFrameworkCore;
-using Infrastructure.Persistence.Context;
+using UserService.Infrastructure.Persistence.Context;
 
-namespace Infrastructure.Persistence.Repositories
+namespace UserService.Infrastructure.Persistence.Repositories
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {

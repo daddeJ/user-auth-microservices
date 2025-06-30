@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  userservice_db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: userservice_db
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "MyStrong!Password1234"
+      ACCEPT_EULA: "Y"
+    volumes:
+      - mssql_data:/var/opt/mssql
+    networks:
+      - userservice-network
+
+volumes:
+  mssql_data:
+
+networks:
+  userservice-network:
+    driver: bridge

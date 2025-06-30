@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Domain.Entities;
+using UserService.Domain.Entities;
 
-namespace Infrastructure.Persistence.Context
+namespace UserService.Infrastructure.Persistence.Context
 {
     public class AppDbContext : DbContext
     {
