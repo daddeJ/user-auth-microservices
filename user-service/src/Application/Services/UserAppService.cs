@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Application.Dtos;
-using Application.Intefaces;
-using Application.Intefaces.Common;
+using UserService.Application.Dtos;
+using UserService.Application.Intefaces;
+using UserService.Application.Intefaces.Common;
 using AutoMapper;
-using Domain.Entities;
+using UserService.Domain.Entities;
 
-namespace Application.Services
+namespace UserService.Application.Services
 {
     public class UserAppService : BaseAppService<User, UserDto, CreateUserDto, UpdateUserDto>, IUserAppService
     {

@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Application.Dtos;
-using Domain.Entities;
+using UserService.Application.Dtos;
+using UserService.Domain.Entities;
 
-namespace Application.Intefaces
+namespace UserService.Application.Intefaces
 {
     public interface IUserAppService : IBaseAppService<UserDto, CreateUserDto, UpdateUserDto>
     {

@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Domain.Entities;
+using UserService.Domain.Entities;
 
-namespace Application.Intefaces.Common
+namespace UserService.Application.Intefaces.Common
 {
     public interface IUserRepository : IBaseRepository<User>
     {

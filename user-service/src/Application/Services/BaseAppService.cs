@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Application.Intefaces;
-using Application.Intefaces.Common;
+using UserService.Application.Intefaces;
+using UserService.Application.Intefaces.Common;
 using AutoMapper;
 
-namespace Application.Services
+namespace UserService.Application.Services
 {
     public class BaseAppService<TEntity, TDto, TCreateDto, TUpdateDto> :
     IBaseAppService<TDto, TCreateDto, TUpdateDto> where TEntity : class
