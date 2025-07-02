@@ -50,7 +50,7 @@ namespace Api.Controllers
             if (!success) return NotFound();
             return NoContent();
         }
-        [HttpGet("by-email")]
+        [HttpPost("{by-email}")]
         public async Task<ActionResult<UserDto>> GetByEmail([FromQuery] string email)
         {
             var user = await _userAppService.GetByEmailAsync(email);
