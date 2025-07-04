@@ -96,7 +96,7 @@ namespace UserService.Tests
             _baseRepositoryMock.Verify(b => b.GetByIdAsync(user.Id), Times.Once);
             _baseRepositoryMock.Verify(b => b.UpdateAsync(It.IsAny<User>()), Times.Once);
             _mapperMock.Verify(m => m.Map(It.IsAny<UpdateUserDto>(), It.IsAny<User>()), Times.Once);
-            _mapperMock.Verify(m => m.Map<UserDto>(It.IsAny<User>()), Times.Once);  
+            _mapperMock.Verify(m => m.Map<UserDto>(It.IsAny<User>()), Times.Once);
         }
 
         [Theory]
@@ -125,6 +125,60 @@ namespace UserService.Tests
             // Then
             Assert.Null(result);
             _userRepositoryMock.Verify(repo => repo.GetByEmailAsync(email), Times.Once);
+        }
+        [Fact]
+        public async Task GetByIdAsync_ReturnsUser_WhenFound()
+        {
+            var userId = MockUserData.GetUser().Id;
+            var expectedUser = MockUserData.GetValidUserDto();
+            _baseRepositoryMock.Setup(b => b.GetByIdAsync(userId)).ReturnsAsync(MockUserData.GetUser());
+            _mapperMock.Setup(m => m.Map<UserDto>(It.IsAny<User>())).Returns(expectedUser);
+
+            var result = await _userAppService.GetByIdAsync(userId);
+
+            Assert.NotNull(result);
+            Assert.Equal(expectedUser.Id, result.Id);
+            Assert.Equal(expectedUser.FirstName, result.FirstName);
+            Assert.Equal(expectedUser.LastName, result.LastName);
+            Assert.Equal(expectedUser.MiddleName, result.MiddleName);
+            Assert.Equal(expectedUser.Gender, result.Gender);
+            Assert.Equal(expectedUser.DateOfBirth, result.DateOfBirth);
+            Assert.Equal(expectedUser.Nationality, result.Nationality);
+            Assert.Equal(expectedUser.CivilStatus, result.CivilStatus);
+            Assert.Equal(expectedUser.Email, result.Email);
+            Assert.Equal(expectedUser.MobileNumber, result.MobileNumber);
+            Assert.Equal(expectedUser.Street, result.Street);
+            Assert.Equal(expectedUser.Barangay, result.Barangay);
+            Assert.Equal(expectedUser.City, result.City);
+            Assert.Equal(expectedUser.Province, result.Province);
+            Assert.Equal(expectedUser.PostalCode, result.PostalCode);
+            Assert.Equal(expectedUser.Country, result.Country);
+            Assert.Equal(expectedUser.Occupation, result.Occupation);
+            Assert.Equal(expectedUser.Industry, result.Industry);
+            _baseRepositoryMock.Verify(b => b.GetByIdAsync(userId), Times.Once);
+            _mapperMock.Verify(m => m.Map<UserDto>(It.IsAny<User>()), Times.Once);
+        }
+        [Fact]
+        public async Task DeleteAsync_DeletesEntity_ReturnsTrue()
+        {
+            var userId = MockUserData.GetUser().Id;
+            _baseRepositoryMock.Setup(b => b.GetByIdAsync(userId)).ReturnsAsync(MockUserData.GetUser());
+
+            var result = await _userAppService.DeleteAsync(userId);
+
+            Assert.True(result);
+            _baseRepositoryMock.Verify(b => b.GetByIdAsync(userId), Times.Once);
+        }
+        [Fact]
+        public async Task DeleteAsync_DeleteEntity_ReturnsFalse()
+        {
+            var userId = Guid.NewGuid();
+            _baseRepositoryMock.Setup(b => b.GetByIdAsync(userId)).ReturnsAsync((User)null);
+
+            var result = await _userAppService.DeleteAsync(userId);
+
+            Assert.False(result);
+            _baseRepositoryMock.Verify(b => b.GetByIdAsync(userId), Times.Once);
         }
     }
 }
