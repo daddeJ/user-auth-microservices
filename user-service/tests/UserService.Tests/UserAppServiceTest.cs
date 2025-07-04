@@ -162,7 +162,10 @@ namespace UserService.Tests
         public async Task DeleteAsync_DeletesEntity_ReturnsTrue()
         {
             var userId = MockUserData.GetUser().Id;
-            _baseRepositoryMock.Setup(b => b.GetByIdAsync(userId)).ReturnsAsync(MockUserData.GetUser());
+            var user = MockUserData.GetUser();
+
+            _baseRepositoryMock.Setup(b => b.GetByIdAsync(userId)).ReturnsAsync(user);
+            _baseRepositoryMock.Setup(b => b.DeleteAsync(userId)).Returns(Task.FromResult(true));
 
             var result = await _userAppService.DeleteAsync(userId);
 
