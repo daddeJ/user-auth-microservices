@@ -7,6 +7,7 @@ obj/
 *.suo
 *.userosscache
 *.sln.docstates
+*.code-workspace
 
 # OS-specific files
 
