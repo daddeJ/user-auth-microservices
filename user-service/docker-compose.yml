@@ -1,6 +1,20 @@
 version: '3.8'
 
 services:
+  userservice_api:
+    container_name: userservice_api
+    build:
+      context: .
+      dockerfile: src/Api/Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=userservice_db,1433;Database=userservice_db;User Id=SA;Password=MyStrong!Password1234;TrustServerCertificate=True;
+    depends_on:
+      - userservice_db
+    networks:
+      - userservice-network
   userservice_db:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: userservice_db
