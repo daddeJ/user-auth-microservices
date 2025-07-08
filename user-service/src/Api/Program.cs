@@ -1,13 +1,18 @@
+using DotNetEnv;
+using Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using UserService.Api.Middleware;
 using UserService.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
+ConfigurationEnvExtensions.LoadEnvironmentVariables();
+
+var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
 builder.Configuration
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{environment}.json", optional: true, reloadOnChange: true)
     .AddEnvironmentVariables();
 
 builder.WebHost.ConfigureKestrel(serverOptions =>
@@ -15,7 +20,8 @@ builder.WebHost.ConfigureKestrel(serverOptions =>
     serverOptions.ListenAnyIP(5000);
 });
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION");
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddUserServiceDependencies(connectionString!);
 
